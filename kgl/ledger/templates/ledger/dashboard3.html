@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        padding: 30px;
+    }
+    .dashboard-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        color: #34495e;
+        text-align: center;
+    }
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+    .card {
+        background: #ecf0f1;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .card:hover {
+        background: #dff9fb;
+        transform: translateY(-5px);
+    }
+    .card a {
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 600;
+        font-size: 18px;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h2 class="dashboard-title">Sales Agent Dashboard</h2>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <a href="{% url 'create_credit_sale' %}">Create Credit Sale</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'credit_sale_list' %}">View Credit Sales</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'receipt' %}">View Sales Receipts</a>
+        </div>
+
+        <!-- Added All Stock Card -->
+        <div class="card">
+            <a href="{% url 'allstock' %}">View All Stock</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+.stock-cards-container .card {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.stock-cards-container .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.stock-cards-container .card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Card Body */
+.stock-cards-container .card-body p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Action Buttons */
+.stock-cards-container .card-footer .btn {
+    width: 48%;
+    padding: 8px 10px;
+}
+
+.stock-cards-container .card-footer .btn i {
+    margin-right: 5px;
+}

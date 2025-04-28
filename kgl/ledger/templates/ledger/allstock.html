@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stock Table{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/allstock.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Table for Stock</h1>
+
+    <div class="table-responsive position-relative">
+        {% if user.is_manager %}
+        <!-- Add Stock Button at top-right inside table container -->
+        <div style="position: absolute; top: 0; right: 0; margin: 10px;">
+            <a href="{% url 'addstock' %}" class="btn btn-primary">Add Stock</a>
+        </div>
+        {% endif %}
+
+        <table class="table table-bordered table-striped table-hover shadow-sm mt-5">
+            <thead class="table-primary">
+                <tr>
+                    <th>Category name</th>
+                    <th>Item name</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Supplier</th>
+                    <th>Date</th>
+                    <th>Branch</th>
+                    <th>Sell Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.category_name }}</td>
+                    <td>{{ stock.item_name }}</td>
+                    <td>{{ stock.total_quantity }}</td>
+                    <td>UGX. {{ stock.cost }}</td>
+                    <td>{{ stock.supplier_type }}</td>
+                    <td>{{ stock.date }}</td>
+                    <td>{{ stock.branch }}</td>
+                    <td>
+                        <a href="{% url 'stockdetail' stock.id %}">
+                            <input type="submit" value="Checkout Item">
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

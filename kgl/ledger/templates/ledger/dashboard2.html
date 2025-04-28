@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .dashboard-container {
+        padding: 30px;
+    }
+    .dashboard-title {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 280px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+    .card a:hover {
+        color: #0056b3;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Manager Dashboard</h1>
+
+    <!-- Stock Alert Section -->
+    {% if low_stock_items %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">⚠️ Low Stock Alerts</h4>
+        <ul>
+            {% for stock in low_stock_items %}
+                <li>{{ stock.item_name }} ({{ stock.category_name }}) — Only {{ stock.total_quantity }} left</li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <p class="mb-0">Consider restocking these items soon.</p>
+    </div>
+    {% else %}
+    <div class="alert alert-success" role="alert">
+        ✅ All stock levels are good.
+    </div>
+    {% endif %}
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>All Stock</h3>
+            <p>View all available stock items.</p>
+            <a href="{% url 'allstock' %}">View Stock</a>
+        </div>
+
+        <div class="card">
+            <h3>Add Stock</h3>
+            <p>Update stock quantity.</p>
+            <a href="{% url 'allstock' %}">Add to Stock</a>
+        </div>
+
+        <div class="card">
+            <h3>All Sales</h3>
+            <p>View all sales records.</p>
+            <a href="{% url 'allsales' %}">View Sales</a>
+        </div>
+
+        <div class="card">
+            <h3>Make a Sale</h3>
+            <p>Sell an item from stock.</p>
+            <a href="{% url 'allstock' %}">Issue Item</a>
+        </div>
+
+        <div class="card">
+            <h3>Cash Receipts</h3>
+            <p>View all cash sale receipts.</p>
+            <a href="{% url 'receipt' %}">View Receipts</a>
+        </div>
+
+        <div class="card">
+            <h3>Record Credit Sale</h3>
+            <p>Create a new credit sale.</p>
+            <a href="{% url 'create_credit_sale' %}">Create Credit Sale</a>
+        </div>
+
+        <div class="card">
+            <h3>Credit Sales List</h3>
+            <p>View all credit sales made.</p>
+            <a href="{% url 'credit_sale_list' %}">View Credit Sales</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

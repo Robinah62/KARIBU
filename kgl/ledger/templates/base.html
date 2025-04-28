@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karibu Groceries</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- Favicon (optional) -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #007bff;">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">Karibu Groceries</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Public Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+
+                    <!-- Sales Agent Dropdown -->
+                    {% if user.role == 'Sales Agent' %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSalesAgent" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Sales Agent
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownSalesAgent">
+                            <li><a class="dropdown-item" href="{% url 'add_sale' %}">Add New Sale (Cash)</a></li>
+                            <li><a class="dropdown-item" href="{% url 'create_credit_sale' %}">Create Credit Sale</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'all_sales' %}">View Own Sales</a></li>
+                            <li><a class="dropdown-item" href="{% url 'credit_sale_list' %}">View Own Credit Sales</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'receipt' %}">Generate Receipt</a></li>
+                            <li><a class="dropdown-item" href="{% url 'receipt_detail' %}">View Specific Receipt
+                                    Details</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    <!-- Manager Dropdown -->
+                    {% if user.role == 'Manager' %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownManager" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Manager
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownManager">
+                            <li><a class="dropdown-item" href="{% url 'add_stock' %}">Add Stock Items</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_stock' %}">View All Stock</a></li>
+                            <li><a class="dropdown-item" href="{% url 'issue_item' %}">Issue Stock to Agents</a></li>
+                            <li><a class="dropdown-item" href="{% url 'credit_sale_list' %}">Approve Credit Sales</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'stock_detail' %}">View Stock Details</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    <!-- Owner/Director Dropdown -->
+                    {% if user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOwner" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Owner/Director
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownOwner">
+                            <li><a class="dropdown-item" href="{% url 'all_sales' %}">View All Sales</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_stock' %}">View Full Stock Report</a></li>
+                            <li><a class="dropdown-item" href="{% url 'credit_sale_list' %}">View All Credit Sales</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'receipt' %}">View Receipts</a></li>
+                            <li><a class="dropdown-item" href="{% url 'receipt_detail' %}">View Receipt Details</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link"
+                                style="padding: 0; margin: 0; border: none;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div>
+                <p class="mb-0">&copy; 2025 Karibu Groceries. All Rights Reserved.</p>
+            </div>
+            <div>
+                <p class="mb-0">Designed by <strong>Nakabugo Robinah</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

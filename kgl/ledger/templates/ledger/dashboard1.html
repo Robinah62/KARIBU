@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        padding: 40px;
+        background-color: #f5f7fa;
+        min-height: 100vh;
+    }
+
+    .dashboard-heading {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 30px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #34495e;
+    }
+
+    .card-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #27ae60;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-heading">Owner Dashboard</h1>
+    
+    <div class="cards">
+        <div class="card">
+            <div class="card-title">Total Sales</div>
+            <div class="card-value">UGX {{ total_sales|floatformat:0 }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Total Credit Sales</div>
+            <div class="card-value">UGX {{ total_credit_sales|floatformat:0 }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Total Stock Remaining</div>
+            <div class="card-value">{{ total_stock|floatformat:0 }} Units</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

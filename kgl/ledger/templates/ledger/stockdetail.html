@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stock Details{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Stock Details</h2>
+        <a href="{% url 'issue_item' stock.id %}" class="btn btn-primary">Sell Item</a>
+    </div>
+    <div>
+        {% if user.is_manager %}
+        <a href="/edit_stock/{{stock.pk}}/">
+            <input type="submit" value="Edit Item">
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (UGX)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ stock.category_name }}</td>
+                    <td>{{ stock.item_name }}</td>
+                    <td>{{ stock.total_quantity }}</td>
+                    <td>{{ stock.unit_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

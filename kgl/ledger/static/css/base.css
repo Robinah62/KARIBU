@@ -1,0 +1,208 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    border-bottom: 2px solid #007bff; /* Blue border below the navbar */
+    background-color: #007bff;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    font-size: 1.1rem;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #0056b3; /* Darker blue when hovering */
+}
+
+.navbar .navbar-toggler-icon {
+    background-color: #fff;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: #007bff;
+    border: none;
+}
+
+.dropdown-item:hover {
+    background-color: #0056b3;
+}
+
+/* Main Content Section */
+.container {
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+.container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+footer .container {
+    text-align: center;
+}
+
+footer .container a {
+    color: #fff;
+    margin: 0 15px;
+    font-size: 1.5rem;
+}
+
+footer .container a:hover {
+    color: #007bff;
+}
+
+/* Additional Styling */
+.navbar-nav.ml-auto .nav-item .nav-link {
+    color: white !important;
+}
+
+.navbar-nav.ml-auto .nav-item .nav-link:hover {
+    color: #d1d1d1 !important;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    footer {
+        text-align: center;
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    border-bottom: 2px solid #007bff; /* Blue border below the navbar */
+    background-color: #007bff;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #0056b3; /* Darker blue when hovering */
+}
+
+/* Dropdown Menu */
+.navbar .dropdown-menu {
+    background-color: #007bff;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow to the dropdown */
+    min-width: 200px;
+}
+
+.navbar .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #f673;
+    color: white;
+}
+
+/* Show Dropdown on Hover */
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+/* Main Content Section */
+.container {
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+.container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+footer .container {
+    text-align: center;
+}
+
+footer .container a {
+    color: #fff;
+    margin: 0 15px;
+    font-size: 1.5rem;
+}
+
+footer .container a:hover {
+    color: #007bff;
+}
+
+/* Additional Styling */
+.navbar-nav.ml-auto .nav-item .nav-link {
+    color: white !important;
+}
+
+.navbar-nav.ml-auto .nav-item .nav-link:hover {
+    color: #d1d1d1 !important;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    footer {
+        text-align: center;
+    }
+}

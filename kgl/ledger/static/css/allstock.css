@@ -1,0 +1,96 @@
+.container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Table Header Styling */
+.table thead th {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    padding: 15px;
+}
+
+/* Table Body Styling */
+.table tbody td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Row Hover Effect */
+.table-hover tbody tr:hover {
+    background-color: #e9f5ff;
+}
+
+/* Button Styling */
+.btn-success {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #28a745;
+}
+
+/* Table Borders */
+.table-bordered th, 
+.table-bordered td {
+    border: 1px solid #dee2e6 !important;
+}
+
+
+
+body {
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.table th,
+.table td {
+    vertical-align: middle !important;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.table th {
+    background-color: #dfefff;
+    color: #2c3e50;
+}
+
+.table td {
+    background-color: #ffffff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.text-end {
+    text-align: right;
+    margin-bottom: 15px; /* Adds space between the button and the table */
+}
+
+.btn-primary {
+    float: right; /* This will place the button to the right */
+    margin-right: 0; /* Ensures there's no space between the button and the edge */
+}

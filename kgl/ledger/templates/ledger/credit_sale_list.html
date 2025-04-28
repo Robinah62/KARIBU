@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>All Credit Sales</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Buyer Name</th>
+                <th>National ID</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Amount Due</th>
+                <th>Sales Agent</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Dispatch Date</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for credit in credit_sales %}
+            <tr>
+                <td>{{ credit.buyer_name }}</td>
+                <td>{{ credit.national_id }}</td>
+                <td>{{ credit.location }}</td>
+                <td>{{ credit.contact }}</td>
+                <td>{{ credit.amount_due }}</td>
+                <td>{{ credit.sales_agent }}</td>
+                <td>{{ credit.product_name }}</td>
+                <td>{{ credit.quantity }}</td>
+                <td>{{ credit.date_of_dispatch }}</td>
+                <td>{{ credit.due_date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10" class="text-center">No Credit Sales Found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
