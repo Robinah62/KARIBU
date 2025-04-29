@@ -70,7 +70,7 @@ class Sale(models.Model):
         default="Cash"
     )
     date = models.DateField(auto_now_add=True)
-    time = models.TimeField(blank=True, null=True)
+    dispatch_time = models.TimeField(blank=True, null=True)
     salesagent = models.ForeignKey(Userprofile, on_delete=models.SET_NULL, null=True, blank=True)
     amount_received = models.FloatField(blank=True, default=0, null=True)
     branch = models.CharField(max_length=20, choices=[("Maganjo", "Maganjo"), ("Matugga", "Matugga")])

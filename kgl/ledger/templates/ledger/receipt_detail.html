@@ -90,7 +90,7 @@
 
                             <div class="d-flex justify-content-between">
                                 <a href="{% url 'receipt' %}" class="btn btn-secondary">Back to Sales</a>
-                                <a href="{% url 'receipt_detail' receipt.id %}" class="btn btn-primary">Print Receipt</a>
+                                <button onclick="window.print()" class="btn btn-sm" style="background-color: antiquewhite; color: black;">Print Receipt</button>
                             </div>
                         </div>
                     </div>

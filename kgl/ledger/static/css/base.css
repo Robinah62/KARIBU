@@ -1,208 +1,108 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fc;
-    margin: 0;
-    padding: 0;
-}
 
-/* Navigation Bar */
-.navbar {
-    border-bottom: 2px solid #007bff; /* Blue border below the navbar */
-    background-color: #007bff;
-}
-
-.navbar .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.navbar .navbar-nav .nav-item .nav-link {
-    font-size: 1.1rem;
-}
-
-.navbar .navbar-nav .nav-item .nav-link:hover {
-    background-color: #0056b3; /* Darker blue when hovering */
-}
-
-.navbar .navbar-toggler-icon {
-    background-color: #fff;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    background-color: #007bff;
-    border: none;
-}
-
-.dropdown-item:hover {
-    background-color: #0056b3;
-}
-
-/* Main Content Section */
-.container {
-    max-width: 1200px;
-    margin-top: 30px;
-}
-
-.container h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Footer Styling */
-footer {
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    z-index: 1050; /* Ensure dropdown is above other elements */
+    display: none;
     background-color: #343a40;
-    color: #fff;
-    padding: 20px 0;
-    margin-top: 50px;
+    border-radius: 0.25rem;
 }
 
-footer .container {
-    text-align: center;
-}
-
-footer .container a {
-    color: #fff;
-    margin: 0 15px;
-    font-size: 1.5rem;
-}
-
-footer .container a:hover {
-    color: #007bff;
-}
-
-/* Additional Styling */
-.navbar-nav.ml-auto .nav-item .nav-link {
-    color: white !important;
-}
-
-.navbar-nav.ml-auto .nav-item .nav-link:hover {
-    color: #d1d1d1 !important;
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-    .navbar-nav {
-        text-align: center;
-    }
-
-    .container {
-        margin-top: 20px;
-    }
-
-    footer {
-        text-align: center;
-    }
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fc;
-    margin: 0;
-    padding: 0;
-}
-
-/* Navigation Bar */
-.navbar {
-    border-bottom: 2px solid #007bff; /* Blue border below the navbar */
-    background-color: #007bff;
-}
-
-.navbar .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-}
-
-.navbar .navbar-nav .nav-item .nav-link {
-    font-size: 1.1rem;
-    color: #fff;
-}
-
-.navbar .navbar-nav .nav-item .nav-link:hover {
-    background-color: #0056b3; /* Darker blue when hovering */
-}
-
-/* Dropdown Menu */
-.navbar .dropdown-menu {
-    background-color: #007bff;
-    border: none;
-    border-radius: 0;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow to the dropdown */
-    min-width: 200px;
-}
-
-.navbar .dropdown-item {
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-}
-
-.navbar .dropdown-item:hover {
-    background-color: #f673;
-    color: white;
-}
-
-/* Show Dropdown on Hover */
-.nav-item:hover .dropdown-menu {
+/* Ensure dropdown shows on hover */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
-
-/* Main Content Section */
-.container {
-    max-width: 1200px;
-    margin-top: 30px;
+.navbar {
+    transition: background-color 0.3s ease;
 }
 
-.container h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
+/* Change navbar color on hover */
+.navbar:hover {
+    background-color: #495057; /* Slightly lighter dark color */
 }
 
-/* Footer Styling */
-footer {
+/* Custom Dropdowns */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Dropdown Menu Styling */
+.navbar-nav .dropdown-menu {
+    border-radius: 8px;
     background-color: #343a40;
+    border: none;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .dropdown-item {
     color: #fff;
-    padding: 20px 0;
-    margin-top: 50px;
+    transition: background-color 0.2s ease;
 }
 
-footer .container {
-    text-align: center;
-}
-
-footer .container a {
+.navbar-nav .dropdown-item:hover {
+    background-color: #495057; /* Darker color on hover */
     color: #fff;
-    margin: 0 15px;
-    font-size: 1.5rem;
 }
 
-footer .container a:hover {
-    color: #007bff;
+/* Navbar Links */
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
-/* Additional Styling */
-.navbar-nav.ml-auto .nav-item .nav-link {
-    color: white !important;
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important; /* Yellow on hover */
 }
 
-.navbar-nav.ml-auto .nav-item .nav-link:hover {
-    color: #d1d1d1 !important;
+/* Active Link Highlight */
+.navbar-nav .nav-item.active .nav-link {
+    color: #ffc107 !important; /* Highlight active link */
 }
 
-/* Responsive Styling */
+/* Toggler Button */
+.navbar-toggler {
+    border-color: #fff !important;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff !important;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .navbar-nav {
         text-align: center;
     }
 
-    .container {
-        margin-top: 20px;
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
     }
+}
 
-    footer {
-        text-align: center;
-    }
+/* Footer Customization */
+footer {
+    background-color: #343a40;
+    color: white;
+}
+
+footer a {
+    color: #ffc107;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .container {
+    padding: 1rem;
+}
+
+/* Custom Styling for Page Content */
+.container {
+    max-width: 1200px;
+    padding: 1.5rem;
 }

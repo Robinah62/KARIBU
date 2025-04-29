@@ -7,3 +7,5 @@ from .models import *
 admin.site.register(Stock)
 admin.site.register(Sale)
 admin.site.register(Category)
+admin.site.register(Userprofile)
+admin.site.register(CreditSale)

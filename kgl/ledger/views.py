@@ -215,4 +215,18 @@ def edit_stock(request, pk):
     
     return render(request, 'ledger/edit_stock.html', {'stock': stock})
 
+# delete view
 
+def delete_stock(request, stock_id):
+    stock = get_object_or_404(Stock, id=stock_id)
+    if request.method == 'POST':
+        stock.delete()
+        return redirect('allstock')  # change if your stock list URL has a different name
+    return render(request, 'ledger/delete_stock.html', {'item': stock})
+
+def delete_sale(request, sale_id):
+    sale = get_object_or_404(Sale, id=sale_id)
+    if request.method == 'POST':
+        sale.delete()
+        return redirect('allsales')  # change if your sales list URL has a different name
+    return render(request, 'ledger/delete_sale.html', {'item': sale})

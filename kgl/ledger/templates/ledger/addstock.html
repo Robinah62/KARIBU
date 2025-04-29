@@ -2,11 +2,13 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Stock</title>
 </head>
+
 <body>
     {% block content %}
     <br>
@@ -46,6 +48,10 @@
             </tbody>
         </table>
     </div>
+    <div style="position: fixed; bottom: 10px; right: 10px;">
+        <a href="javascript:history.back()">Back</a>
+    </div>
     {% endblock %}
 </body>
+
 </html>

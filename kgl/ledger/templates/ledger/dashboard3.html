@@ -4,37 +4,44 @@
 {% block content %}
 <style>
     .dashboard-container {
-        padding: 30px;
+        padding: 40px 20px;
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .dashboard-title {
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 25px;
-        color: #34495e;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 40px;
+        color: #2c3e50;
         text-align: center;
     }
     .dashboard-cards {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
+        gap: 25px;
+        padding: 0 20px;
     }
     .card {
         background: #ecf0f1;
-        padding: 25px;
-        border-radius: 12px;
+        padding: 30px 20px;
+        border-radius: 15px;
         text-align: center;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 6px 10px rgba(0,0,0,0.1);
     }
     .card:hover {
         background: #dff9fb;
-        transform: translateY(-5px);
+        transform: translateY(-8px);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
     }
     .card a {
         text-decoration: none;
         color: #2c3e50;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 20px;
+        display: block;
     }
 </style>
 
@@ -45,20 +52,15 @@
         <div class="card">
             <a href="{% url 'create_credit_sale' %}">Create Credit Sale</a>
         </div>
-
         <div class="card">
             <a href="{% url 'credit_sale_list' %}">View Credit Sales</a>
         </div>
-
         <div class="card">
             <a href="{% url 'receipt' %}">View Sales Receipts</a>
         </div>
-
-        <!-- Added All Stock Card -->
         <div class="card">
             <a href="{% url 'allstock' %}">View All Stock</a>
         </div>
     </div>
 </div>
-
 {% endblock %}

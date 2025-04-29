@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h3 class="text-danger">Are you sure you want to delete this sale record?</h3>
+    <p><strong>Sale ID: {{ item.id }}</strong></p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'allsales' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

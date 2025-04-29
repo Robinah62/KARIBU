@@ -65,7 +65,8 @@ urlpatterns = [
     path('credit_sales_list/', views.credit_sale_list, name='credit_sale_list'),
     path('dashboard1/', views.owner_dashboard, name='owner_dashboard'),
     path('edit_stock/<int:pk>/', views.edit_stock, name='edit_stock'),
-    
+    path('delete_stock/<int:stock_id>/', views.delete_stock, name='delete_stock'),
+    path('delete_sale/<int:sale_id>/', views.delete_sale, name='delete_sale'),
     
 ]
 
