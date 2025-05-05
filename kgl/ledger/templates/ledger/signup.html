@@ -1,27 +1,128 @@
-{% load static %}
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block navbar %}{% endblock%}
+{% block content %}
+<style>
+    /* Reset body display to default for this page */
+    body {
+        display: block !important;
+        min-height: auto !important;
+        align-items: initial !important;
+        justify-content: initial !important;
+    }
 
-    {% if request.user.is_authenticated %}
-    <div class = "flex item-center space-x-4 px-6">
-        <a href=""><input type="button">Logout</a>
-        {% else %}
-        <a href=""><input type="button">Login</a>
-        {% endif %}
+    .container {
+        max-width: 900px;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        margin: 30px auto; /* Center the container horizontally */
+    }
+
+    .auth-wrapper h2 {
+        color: #2e7d32; /* A darker shade of green for the heading */
+        text-align: center;
+        margin-bottom: 35px;
+        font-size: 2.5em;
+        font-weight: 600;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin-bottom: 30px; /* Add some space below the columns */
+    }
+
+    .col-md-6 {
+        flex: 1;
+        min-width: 45%;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    label {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #a5d6a7; /* A light green for the border */
+        border-radius: 8px;
+        background-color: #f8f8f8;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: #4caf50; /* A vibrant green on focus */
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.3);
+    }
+
+    .text-danger {
+        color: #d32f2f; /* A shade of red for errors */
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .btn-submit {
+        background-color: #4caf50; /* Vibrant green for the button */
+        color: #fff;
+        border: none;
+        padding: 14px 30px;
+        font-size: 1.1em;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 35px auto 0 auto; /* Center the button with some top margin */
+        cursor: pointer;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-submit:hover {
+        background-color: #388e3c; /* Darker shade of vibrant green on hover */
+    }
+</style>
+
+<div class="container">
+    <div class="auth-wrapper">
+        <h2>Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {% for field in form.visible_fields|slice:":form.visible_fields|length//2" %}
+                    <div class="form-group">
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    {% for field in form.visible_fields|slice:"form.visible_fields|length//2:" %}
+                    <div class="form-group">
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <input type="submit" value="Register" class="btn-submit">
+        </form>
     </div>
-    {% block content %}
-    <form action = "" method="POST">
-        {% csrf_token %}
-        {{form | crispy}}
-        <input type="submit" value ="Register" class="bg_blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">  
-    {% endblock %}
-    </form>
-</body>
-</html>
+</div>
+{% endblock %}

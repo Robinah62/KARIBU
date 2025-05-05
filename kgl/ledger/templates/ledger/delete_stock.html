@@ -1,8 +1,58 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+
+
 {% block content %}
-<div class="container mt-5 text-center">
-    <h3 class="text-danger">Are you sure you want to delete this stock item?</h3>
-    <p><strong>{{ item.item_name }}</strong></p>
+<style>
+    .delete-container {
+        min-height: 80vh; /* Push footer down */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .delete-heading {
+        color: #e74c3c; /* red tone for warning */
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .item-name {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+    }
+
+    .btn-secondary {
+        background-color: #16a085; /* your preferred green */
+        border-color: #16a085;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #138d75;
+        border-color: #138d75;
+    }
+</style>
+
+<div class="container delete-container">
+    <h3 class="delete-heading">Are you sure you want to delete this stock item?</h3>
+    <p class="item-name"><strong>{{ item.item_name }}</strong></p>
     <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Yes, Delete</button>

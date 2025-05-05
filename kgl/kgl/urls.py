@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    #below is the url for index page
+    #below is the url for index page  
     path('',views.index, name='index'),
 
     #below is the url for sales page
@@ -67,7 +67,8 @@ urlpatterns = [
     path('edit_stock/<int:pk>/', views.edit_stock, name='edit_stock'),
     path('delete_stock/<int:stock_id>/', views.delete_stock, name='delete_stock'),
     path('delete_sale/<int:sale_id>/', views.delete_sale, name='delete_sale'),
-    
+    path('add_stock/', views.add_stock, name='add_stock'),
+    path('edit-sale/<int:pk>/', views.edit_sale, name='edit_sale'),
 ]
 
 

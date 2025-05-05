@@ -1,57 +1,87 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Stock</title>
-</head>
+{% block content %}
+<style>
+    body {
+        background-color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
 
-<body>
-    {% block content %}
-    <br>
-    <div class="container">
-        <form action="" method="POST">
-            <h1 class="text-center">Add To Stock Form</h1>
-            <br>
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" class="btn btn-secondary">
-        </form>
+    .content-wrapper {
+        flex: 1;
+        padding: 40px 20px;
+    }
 
-        <br><br>
-        <h2>Stock Table</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Total Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in stock_items %}
-                <tr>
-                    <td>{{ item.product_name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.cost }}</td>
-                    <td>{{ total_value }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4" class="text-center">No stock items available</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    .card {
+        border: none;
+        border-top: 5px solid #f39c12;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        background-color: #fff;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    h1, h2 {
+        color: #16a085;
+    }
+
+    .btn-secondary {
+        background-color: #16a085;
+        border: none;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #138d75;
+    }
+
+    .table thead {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: auto;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #f39c12;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <h1 class="text-center">Update Stock</h1>
+                <hr>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="text-center mt-3">
+                    <input type="submit" class="btn btn-secondary" value="Update Stock">
+                </div>
+            </form>
+        </div>
     </div>
-    <div style="position: fixed; bottom: 10px; right: 10px;">
-        <a href="javascript:history.back()">Back</a>
-    </div>
-    {% endblock %}
-</body>
 
-</html>
+    
+{% endblock %}

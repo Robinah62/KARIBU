@@ -8,8 +8,55 @@
         <div class="card-body text-center">
             <h2 class="card-title text-success">Logged Out Successfully</h2>
             <p class="card-text mt-3 mb-4">You have been logged out. Thank you for visiting!<br>We hope to see you again soon.</p>
-            <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Return to Home Page</a>
+            <a href="{% url 'index' %}" class="btn btn-lg home-btn">Return to Home Page</a>
         </div>
     </div>
 </div>
+
+<style>
+    body {
+        padding-top: 56px; /* Height of navbar */
+        padding-bottom: 60px; /* Height of footer */
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+    
+    .home-btn {
+        background-color: #16a085;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .home-btn:hover {
+        background-color: #9df2d8;
+        color: #333;
+    }
+    
+    /* Fixed navbar styles */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 56px;
+    }
+
+    /* Fixed footer styles */
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 10px 0;
+        z-index: 900;
+        height: 60px;
+    }
+</style>
 {% endblock %}

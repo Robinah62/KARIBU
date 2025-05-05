@@ -1,108 +1,29 @@
-
-.navbar-nav .dropdown-menu {
-    position: absolute;
-    z-index: 1050; /* Ensure dropdown is above other elements */
-    display: none;
-    background-color: #343a40;
-    border-radius: 0.25rem;
+/*.navbar a:hover {
+    background-color: #1b5e20;
+    color: white !important;
 }
 
-/* Ensure dropdown shows on hover */
-.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-}
-.navbar {
-    transition: background-color 0.3s ease;
-}
+.btn {
+    font-weight: 500;
+    border-radius: 6px;
+}*/
 
-/* Change navbar color on hover */
-.navbar:hover {
-    background-color: #495057; /* Slightly lighter dark color */
-}
-
-/* Custom Dropdowns */
-.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-/* Dropdown Menu Styling */
-.navbar-nav .dropdown-menu {
-    border-radius: 8px;
-    background-color: #343a40;
-    border: none;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-nav .dropdown-item {
-    color: #fff;
-    transition: background-color 0.2s ease;
-}
-
-.navbar-nav .dropdown-item:hover {
-    background-color: #495057; /* Darker color on hover */
-    color: #fff;
-}
-
-/* Navbar Links */
-.navbar-nav .nav-link {
-    color: #fff !important;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #ffc107 !important; /* Yellow on hover */
-}
-
-/* Active Link Highlight */
-.navbar-nav .nav-item.active .nav-link {
-    color: #ffc107 !important; /* Highlight active link */
-}
-
-/* Toggler Button */
-.navbar-toggler {
-    border-color: #fff !important;
-}
-
-.navbar-toggler-icon {
-    background-color: #fff !important;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .navbar-nav {
-        text-align: center;
-    }
-
-    .navbar-nav .nav-item {
-        margin: 0.5rem 0;
-    }
-}
-
-/* Footer Customization */
 footer {
-    background-color: #343a40;
-    color: white;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    margin-top: auto;
+}
+.navbar .nav-link {
+    color: white !important;
+    font-weight: 500;
+    margin-right: 12px; /* spacing between links */
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+    padding: 6px 10px;
 }
 
-footer a {
-    color: #ffc107;
+.navbar .nav-link:hover {
+    background-color: #1b5e20;
+    color: white !important;
     text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-footer .container {
-    padding: 1rem;
-}
-
-/* Custom Styling for Page Content */
-.container {
-    max-width: 1200px;
-    padding: 1.5rem;
 }

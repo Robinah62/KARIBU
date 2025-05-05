@@ -1,62 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Sales</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block title %}All Sales{% endblock %}
 
-<body>
-  <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2 class="text-center">All Sales</h2>
-      <a href="{% url 'addsales' %}" class="btn btn-primary">Add New Sale</a>
+{% block content %}
 
-    </div>
+<style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-          <tr>
-            <th>Product Name</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-            <th>Payment Method</th>
-            <th>Customer Name</th>
-            <th>Date</th>
-            <th>Sales Agent</th>
-            <th>Amount Received</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for sale in sales %}
-          <tr>
-            <td>{{ sale.product_name }}</td>
-            <td>{{ sale.unit_price }}</td>
-            <td>{{ sale.quantity }}</td>
-            <td>{{ sale.payment_method }}</td>
-            <td>{{ sale.customer_name }}</td>
-            <td>{{ sale.date }}</td>
-            <td>{{ sale.salesagent }}</td>
-            <td>{{ sale.amount_received }}</td>
-            <td>
-              <a href="{% url 'delete_sale' sale.id %}" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-          </tr>
-          {% endfor %}
-          <div style="position: fixed; bottom: 10px; right: 10px;">
-            <a href="javascript:history.back()">Back</a>
-          </div>
-        </tbody>
-      </table>
-    </div>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1 0 auto;
+    padding-bottom: 70px; /* Add space for footer */
+  }
+
+  footer {
+    margin-top: auto;
+    width: 100%;
+
+  }
+
+  /* Table styling */
+  .table thead {
+    background-color: #16a085;
+    color: white;
+  }
+
+  .table th,
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .btn-success {
+    background-color: #16a085;
+    border: none;
+  }
+
+  .btn-success:hover {
+    background-color: #138d75;
+  }
+
+  .btn-warning {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+  }
+
+  .btn-warning:hover {
+    background-color: #e08e0b;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #e74c3c;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #c0392b;
+  }
+
+  h2 {
+    color: #16a085;
+    font-weight: bold;
+  }
+
+  .actions-column {
+    white-space: nowrap;
+  }
+</style>
+
+<main class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cash Sales List</h2>
+    <a href="{% url 'addsales' %}" class="btn btn-success">
+      <i class="fas fa-plus-circle me-1"></i> Add New Sale
+    </a>
   </div>
 
-  <!-- Bootstrap JS (optional for interactions) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover shadow-sm">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Payment Method</th>
+          <th>Customer Name</th>
+          <th>Date</th>
+          <th>Sales Agent</th>
+          <th>Amount Received</th>
+          {% if user.is_manager %}
+          <th>Actions</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for sale in sales %}
+        <tr>
+          <td>{{ sale.product_name }}</td>
+          <td>{{ sale.unit_price }}</td>
+          <td>{{ sale.quantity }}</td>
+          <td>{{ sale.payment_method }}</td>
+          <td>{{ sale.customer_name }}</td>
+          <td>{{ sale.date }}</td>
+          <td>{{ sale.salesagent }}</td>
+          <td>{{ sale.amount_received }}</td>
+          {% if user.is_manager %}
+          <td class="actions-column">
+            <a href="{% url 'edit_sale' sale.id %}" class="btn btn-warning btn-sm me-1">
+              <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'delete_sale' sale.id %}" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash-alt"></i> Delete
+            </a>
+          </td>
+          {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="{% if user.is_manager %}9{% else %}8{% endif %}" class="text-muted text-center">No sales records found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</main>
 
-</html>
+{% endblock %}

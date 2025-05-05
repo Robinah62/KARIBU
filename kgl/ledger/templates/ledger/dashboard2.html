@@ -1,111 +1,171 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
-
 <style>
+ .body{
+    background-attachment: fixed;
+    height: 100%;
+  overflow: hidden;
+ }
+  .dashboard-container {
+    /* padding: 20px; */
+    margin-left: 260px;
+}
+
+.dashboard-header {
+    text-align: center;
+    /* margin-top: 20px;
+    margin-bottom: 40px; */
+}
+
+.dashboard-header h2 {
+    color: #16a085;
+    font-weight: bold;
+}
+
+.card-box {
+    background-color: #e8f5e9;
+    border-radius: 15px;
+    padding: 30px 0px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease-in-out;
+    margin-left: 50px;
+}
+
+.card-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-box h3 {
+    color: #16a085;
+    margin-bottom: 15px;
+}
+
+.card-box p {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.btn-custom {
+    background-color: #16a085;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn-custom:hover {
+    background-color: #138d75;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0; /* Adjust if your navbar height is different */
+    left: 0;
+    width: 250px;
+    height:445px; /* Adjust for navbar and footer space */
+    background-color: #1b5e20;
+    padding: 20px 10px;
+    overflow-y: auto;
+    z-index: 1;
+    margin-top: 53px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #138d75;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: 90px;
+    }
+
     .dashboard-container {
-        padding: 30px;
-    }
-    .dashboard-title {
-        text-align: center;
-        font-size: 32px;
-        margin-bottom: 30px;
-        color: #2c3e50;
-    }
-    .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-    .card {
-        background-color: #f8f9fa;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        width: 280px;
+        margin-left: 260px;
         padding: 20px;
-        text-align: center;
-        transition: transform 0.3s ease;
     }
-    .card:hover {
-        transform: translateY(-5px);
+
+    .col-md-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
-    .card a {
-        text-decoration: none;
-        color: #007bff;
-        font-weight: bold;
-    }
-    .card a:hover {
-        color: #0056b3;
-    }
+}
+
 </style>
-
-<div class="dashboard-container">
-    <h1 class="dashboard-title">Manager Dashboard</h1>
-
-    <!-- Stock Alert Section -->
-    {% if low_stock_items %}
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">⚠️ Low Stock Alerts</h4>
+<link rel="stylesheet" href="{% static 'css/manager_dashboard.css' %}">
+<body class="body">
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar">
         <ul>
-            {% for stock in low_stock_items %}
-                <li>{{ stock.item_name }} ({{ stock.category_name }}) — Only {{ stock.total_quantity }} left</li>
-            {% endfor %}
+            <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+            <li><a href="{% url 'allstock' %}"><i class="fa fa-boxes"></i> All Stock</a></li>
+            <li><a href="{% url 'allsales' %}"><i class="fa fa-chart-line"></i> All Sales</a></li>
+            <li><a href="{% url 'receipt' %}"><i class="fa fa-receipt"></i> Receipts</a></li>
+            <li><a href="{% url 'index' %}"><i class="fa fa-cogs"></i> Home</a></li>
         </ul>
-        <hr>
-        <p class="mb-0">Consider restocking these items soon.</p>
     </div>
-    {% else %}
-    <div class="alert alert-success" role="alert">
-        ✅ All stock levels are good.
-    </div>
-    {% endif %}
 
-    <div class="card-container">
-
-        <div class="card">
-            <h3>All Stock</h3>
-            <p>View all available stock items.</p>
-            <a href="{% url 'allstock' %}">View Stock</a>
+    <!-- Dashboard -->
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2>Welcome, {{ user.username }}</h2>
         </div>
 
-        <div class="card">
-            <h3>Add Stock</h3>
-            <p>Update stock quantity.</p>
-            <a href="{% url 'allstock' %}">Add to Stock</a>
-        </div>
+        <div class="row">
+            <div class="col-md-5 mb-4">
+                <div class="card-box">
+                    <h3>Total Sales</h3>
+                    <p>UGX {{ total_sales|floatformat:0 }}</p>
+                </div>
+            </div>
 
-        <div class="card">
-            <h3>All Sales</h3>
-            <p>View all sales records.</p>
-            <a href="{% url 'allsales' %}">View Sales</a>
-        </div>
+            <div class="col-md-5 mb-4">
+                <div class="card-box">
+                    <h3>Total Credit Sales</h3>
+                    <p>UGX {{ total_credit_sales|floatformat:0 }}</p>
+                </div>
+            </div>
 
-        <div class="card">
-            <h3>Make a Sale</h3>
-            <p>Sell an item from stock.</p>
-            <a href="{% url 'allstock' %}">Issue Item</a>
-        </div>
+            <div class="col-md-5 mb-4">
+                <div class="card-box">
+                    <h3>Total Cash Sales</h3>
+                    <p>UGX {{ total_cash|floatformat:0 }}</p>
+                </div>
+            </div>
 
-        <div class="card">
-            <h3>Cash Receipts</h3>
-            <p>View all cash sale receipts.</p>
-            <a href="{% url 'receipt' %}">View Receipts</a>
+            <div class="col-md-5 mb-4">
+                <div class="card-box">
+                    <h3>Total Stock Remaining</h3>
+                    <p>{{ total_stock|floatformat:0 }} KGS</p>
+                </div>
+            </div>
         </div>
-
-        <div class="card">
-            <h3>Record Credit Sale</h3>
-            <p>Create a new credit sale.</p>
-            <a href="{% url 'create_credit_sale' %}">Create Credit Sale</a>
-        </div>
-
-        <div class="card">
-            <h3>Credit Sales List</h3>
-            <p>View all credit sales made.</p>
-            <a href="{% url 'credit_sale_list' %}">View Credit Sales</a>
-        </div>
-
     </div>
 </div>
-
+</body>
 {% endblock %}

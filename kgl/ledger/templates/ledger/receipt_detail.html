@@ -1,104 +1,182 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Receipt Detail</title>
-    <link rel="stylesheet" href="{% static 'css/receipt.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="receipt-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Logo Placeholder -->
-                            <div class="text-center mb-4">
-                                <!-- Insert your logo here -->
-                                <img src="{% static 'images/your-logo.png' %}" alt="Your Logo" style="max-height: 50px;">
-                            </div>
 
-                            <!-- Business Information -->
-                            <div class="text-center">
-                                <h2><strong>Your Business Name</strong></h2>
-                                <p>Your Business Address, City</p>
-                                <p>Contact: +1234567890 | Email: info@yourbusiness.com</p>
-                                <hr>
-                            </div>
+{% block content %}
+<style>
+    body {
+        background-color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+    }
 
-                            <!-- Receipt Header -->
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5><strong>Sales Receipt</strong></h5>
-                                    <p><strong>Receipt #: </strong>{{ receipt.id }}</p>
-                                    <p><strong>Date: </strong>{{ receipt.date }}</p>
-                                    <p><strong>Time: </strong>{{ receipt.time }}</p>
-                                </div>
-                                <div class="text-right">
-                                    <h5><strong>Customer</strong></h5>
-                                    <p><strong>Name: </strong>{{ receipt.customer_name }}</p>
-                                    <p><strong>Payment Method: </strong>{{ receipt.payment_method }}</p>
-                                    <p><strong>Sales Agent: </strong>{{ receipt.salesagent.username }}</p>
-                                </div>
-                            </div>
+    .card {
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+    }
 
-                            <hr>
+    .card-body {
+        padding: 30px;
+    }
 
-                            <!-- Product Details -->
-                            <table class="table table-bordered table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Item Name</th>
-                                        <th>Quantity</th>
-                                        <th>Unit Price (UGX)</th>
-                                        <th>Total Price (UGX)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ receipt.product_name.item_name }}</td>
-                                        <td class="text-center">{{ receipt.quantity }}</td>
-                                        <td class="text-right">{{ receipt.unit_price }}</td>
-                                        <td class="text-right">{{ receipt.get_total }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+    h2, h5, th {
+        color: #16a085;
+    }
 
-                            <hr>
+    hr {
+        border-top: 2px solid #f39c12;
+    }
 
-                            <!-- Payment Summary -->
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p><strong>Amount Received: </strong>UGX {{ receipt.amount_received }}</p>
-                                    <p><strong>Change Given: </strong>UGX {{ receipt.get_change }}</p>
-                                </div>
-                                <div class="text-right">
-                                    <h4><strong>Total: UGX {{ receipt.get_total }}</strong></h4>
-                                </div>
-                            </div>
+    table th {
+        background-color: #f39c12;                  
+        color: #ffffff;
+    }
 
-                            <hr>
+    table td {
+        vertical-align: middle;
+        font-size: 14px;
+    }
 
-                            <!-- Footer Note -->
-                            <div class="text-center">
-                                <p>Thank you for shopping with us!</p>
-                                <p>For queries or returns, please contact us at info@yourbusiness.com or call +1234567890</p>
-                            </div>
+    .btn-secondary {
+        background-color: #16a085;
+        border: none;
+        color: #ffffff;
+    }
 
-                            <div class="d-flex justify-content-between">
-                                <a href="{% url 'receipt' %}" class="btn btn-secondary">Back to Sales</a>
-                                <button onclick="window.print()" class="btn btn-sm" style="background-color: antiquewhite; color: black;">Print Receipt</button>
-                            </div>
+    .btn-secondary:hover {
+        background-color: #138d75;
+    }
+
+    .btn-print {
+        background-color: #f39c12;
+        color: #ffffff;
+        border: none;
+    }
+
+    .btn-print:hover {
+        background-color: #e67e22;
+        color: #ffffff;
+    }
+
+    .receipt-wrapper {
+        padding: 20px 10px;
+    }
+
+    .receipt-header h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .receipt-details p, .payment-summary p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .total-amount {
+        font-size: 20px;
+        color: #16a085;
+    }
+
+
+    
+
+    .footer-note {
+        font-size: 13px;
+        color: #888;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+    }
+</style>
+
+<div class="receipt-wrapper container">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="text-center mb-3">
+                        <img src="#" alt="Karibu Groceries Logo" class="logo">
+                    </div>
+
+                    <!-- Header -->
+                    <div class="text-center receipt-header">
+                        <h2><strong>FINAL RECEIPT</strong></h2>
+                        <p>Karibu Groceries LTD</p>
+                        <p>Contact: +256-700000000 | info@karibugroceries.com</p>
+                        <hr>
+                    </div>
+
+                    <!-- Receipt Info -->
+                    <div class="row mb-3">
+                        <div class="col-md-6 receipt-details">
+                            <h5><strong>Sales Receipt</strong></h5>
+                            <p><strong>Receipt #: </strong>{{ receipt.id }}</p>
+                            <p><strong>Date: </strong>{{ receipt.date }}</p>
+                            <p><strong>Time: </strong>{{ receipt.time }}</p>
+                        </div>
+                        <div class="col-md-6 text-md-end receipt-details">
+                            <h5><strong>Customer</strong></h5>
+                            <p><strong>Name: </strong>{{ receipt.customer_name }}</p>
+                            <p><strong>Payment: </strong>{{ receipt.payment_method }}</p>
+                            <p><strong>Sales Agent: </strong>{{ receipt.salesagent.username }}</p>
+                            
                         </div>
                     </div>
+
+                    <!-- Products -->
+                    <div class="table-responsive mb-3">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Unit Price (UGX)</th>
+                                    <th class="text-end">Total Price (UGX)</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ receipt.product_name.item_name }}</td>
+                                    <td class="text-center">{{ receipt.quantity }}</td>
+                                    <td class="text-end">{{ receipt.unit_price }}</td>
+                                    <td class="text-end">{{ receipt.get_total }}</td>
+                                    <td class="text-end">{{ receipt.branch }}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Summary -->
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-6 payment-summary">
+                            <p><strong>Amount Received:</strong> UGX {{ receipt.amount_received }}</p>
+                            <p><strong>Change Given:</strong> UGX {{ receipt.get_change }}</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <h4 class="total-amount"><strong>Total: UGX {{ receipt.get_total }}</strong></h4>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <hr>
+                    <div class="text-center footer-note mb-3">
+                        <p>Thank you for shopping with Karibu Groceries LTD!</p>
+                        <p>For support, contact info@karibugroceries.com</p>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'receipt' %}" class="btn btn-secondary">Back to Sales</a>
+                        <button onclick="window.print()" class="btn btn-print">Print Receipt</button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}

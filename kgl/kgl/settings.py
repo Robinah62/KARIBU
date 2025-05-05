@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ledger',
     'crispy_forms',
-    'crispy_bootstrap4',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -123,8 +123,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 
 

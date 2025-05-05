@@ -44,3 +44,8 @@ class CreditSaleForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={'type': 'date'}),
             'date_of_dispatch': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class SaleForm(forms.ModelForm):
+    class Meta:
+        model = Sale
+        fields = '__all__'
